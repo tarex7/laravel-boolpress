@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class PostPublishedMail extends Mailable
+class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,8 +29,7 @@ class PostPublishedMail extends Mailable
     public function build()
     {
         return $this
-        ->from('Boolpress@pippo.com')
-        ->view('mails.postPublishedMail');
-
+        ->from('tarex7@gmail.com')
+        ->markdown('mails.orderShipped');
     }
 }

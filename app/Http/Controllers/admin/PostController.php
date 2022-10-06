@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\User;
 use App\Models\Tag;
-use App\Mail\PostPublishedMail;
+use App\Mail\OrderShipped;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -76,7 +76,7 @@ class PostController extends Controller
         }
 
         //Qui mando la mail
-        $mail = new PostPublishedMail(); //creo mail
+        $mail = new OrderShipped(); //creo mail
 
         $user_email = Auth::user()->email;
 
