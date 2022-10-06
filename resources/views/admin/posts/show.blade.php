@@ -9,7 +9,7 @@
 
         <div class="clearfix p-4">
 
-            <img class="float-left mr-3" src="{{ $post->image }}" alt="image-preview">
+            <img class="float-left mr-3 img-fluid" src="{{ asset('storage/' .$post->image) }}" alt="image-preview" width="500">
             
             <p >{{ $post->text }}</p>
             <p ><strong>Creato il:</strong> {{ $post->created_at }}</p>

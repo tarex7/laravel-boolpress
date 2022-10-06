@@ -30,7 +30,7 @@ class PostSeeder extends Seeder
             $new_post->category_id = Arr::random($categories_ids);
             $new_post->user_id = Arr::random($users_ids);
             $new_post->text = $faker->paragraphs(8,true);
-            $new_post->image = $faker->imageUrl(300, 200, 'animals', true);
+            //$new_post->image = $faker->imageUrl(400, 400, 'animals', true);
      
             $new_post->save();
         }

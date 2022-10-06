@@ -1,10 +1,10 @@
 
 
 @if($post->exists) 
-<form action="{{ route('admin.posts.update', $post) }}" method="POST">
+<form action="{{ route('admin.posts.update', $post) }}"  enctype="multipart/form-data" method="POST">
 @method('PUT')
 @else
-<form action="{{ route('admin.posts.store') }}" method="POST">
+<form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
     @endif
     @csrf
         <div class="row">
@@ -58,18 +58,18 @@
                 </div>
             </div>
             <div class="col-10">
-                <div class="form-group">
-                    <label for="image">Immagine</label>
+                <div class="form-group d-flex flex-column">
+                    <label for="image">Immagine: </label>
                     <input
-                     type="url"
-                     class="form-control"
+                     type="file"
+                     class=""
                      id="image"
                      name="image"
-                     value="{{ $post->image, old('image') }}">
+                     >
                 </div>
             </div>
             <div class="col-2">
-            <img class="img-fluid" src="{{ $post->image ?? 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png' }}" alt="preview" id="preview">
+            <img class="img-fluid" src="{{ $post->image ? asset('storage/' .$post->image) : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png' }}" alt="preview" id="preview">
         </div>
                                 
         </div>
