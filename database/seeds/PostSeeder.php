@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 use Faker\Generator as Faker;
 use App\Models\Post;
@@ -27,6 +28,7 @@ class PostSeeder extends Seeder
             $new_post = new Post();
 
             $new_post->title = $faker->text(50);
+            $new_post->slug = Str::slug($new_post->title, '-');
             $new_post->category_id = Arr::random($categories_ids);
             $new_post->user_id = Arr::random($users_ids);
             $new_post->text = $faker->paragraphs(8,true);
