@@ -9,6 +9,7 @@ use App\User;
 use App\Models\Tag;
 use App\Mail\OrderShipped;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
@@ -22,6 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        $tags_ids = Tag::pluck('id')->toArray();
         $posts = Post::all();
         $tags = Tag::select('id','label','color')->get();
 
@@ -56,8 +58,8 @@ class PostController extends Controller
         $data = $request->all();
 
         $post = new Post();
-
         $post->fill($data);
+        $post->slug = Str::slug($post->title,'-');
         $post->user_id = Auth::id();
 
         //controllo che mi arrivi una chiave image in data
@@ -127,6 +129,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $data = $request->all();
+        $tags = Tag::select('id','label')->get();
 
         
 
@@ -138,6 +141,11 @@ class PostController extends Controller
             //se c'è uso Facade Storage con metodo put (dove voglio salvare l'immmagine, /public/post_images)
             $url = Storage::put('post_images', $data['image']); // storage crea un link
             $post->image = $url; //nel database post image = url
+        }
+
+        if(array_key_exists('tags', $data)) {
+
+            $post->tags()->sync($data['tags']);
         }
 
         $post->update();

@@ -15,7 +15,8 @@
             </p>
 
             <div class="mt-4 d-flex justify-content-between">
-                <span
+                
+                <span 
                     class="badge px-2 align-items-center d-flex"
                     :class="`badge-${post.category.color}`"
                     >{{ post.category.label }}</span

@@ -23,9 +23,11 @@
         <tbody>
             @forelse ($posts as $post)
             <tr>
+              {{-- ID --}}
               <th scope="row">{{ $post->id}}</th>
-
+              {{-- TITLE --}}
               <td>{{ $post->title}}</td>
+              {{-- TAGS --}}
               <td>
                 @forelse ($post->tags as $tag)
                     <p style="background-color: {{ $tag->color }}" class="badge">{{$tag->label}}</p>
@@ -33,10 +35,16 @@
                    - 
                 @endforelse
               </td>
+              {{-- AUTHOR --}}
               <td>@if( $post->user){{ $post->user->name}} @else Anonimo @endif</td>
+              {{-- CATEGORY --}}
               <td>@if($post->category){{ $post->category->label }} @else Nessuna @endif</td>
+              {{-- CREATED AT --}}
               <td>{{ $post->created_at}}</td>
+              {{-- EDITED AT --}}
               <td>{{ $post->updated_at}}</td>
+
+              
               <td><a href="{{ route('admin.posts.show', $post) }}" class="btn btn-primary"><i class="fa-solid fa-eye mx-2"></i>Vedi</a></td>
               <td><a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-warning"><i class="fa-solid fa-eye mx-2"></i>Modifica</a></td>
               <td><form action="{{ route('admin.posts.destroy',$post) }}" method="POST">
